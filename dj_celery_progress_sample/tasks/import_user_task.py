@@ -35,7 +35,7 @@ class ImportUserFromExcelTask(BaseTask):
         for index, row in dataframe.iterrows():
             self.insert_into_row(row)
             progress_recorder.set_progress(index + 1, total=total_record, description="Inserting row into table")
-            print("Inserting row %s into table" % index)
+            print(f"Inserting row {index} into table")
 
         return {
             "detail": "Successfully import user"

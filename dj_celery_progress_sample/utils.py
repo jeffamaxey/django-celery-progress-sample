@@ -13,5 +13,6 @@ class DataframeUtil(object):
 
 
 def in_memory_file_to_temp(in_memory_file):
-    path = default_storage.save('tmp/%s' % in_memory_file.name, ContentFile(in_memory_file.read()))
-    return path
+    return default_storage.save(
+        f'tmp/{in_memory_file.name}', ContentFile(in_memory_file.read())
+    )

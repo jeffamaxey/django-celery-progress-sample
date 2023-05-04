@@ -24,7 +24,7 @@ class ExportUserIntoExcelTask(BaseTask):
 
     def copy_and_get_copied_path(self):
         template_path = os.path.join(settings.BASE_DIR, "static/docs/users-template.xlsx")
-        destination_path = "%s/%s-exported-users.xlsx" % (tempfile.gettempdir(), int(timezone.now().timestamp()))
+        destination_path = f"{tempfile.gettempdir()}/{int(timezone.now().timestamp())}-exported-users.xlsx"
         shutil.copy(template_path, destination_path)
         return destination_path
 
@@ -43,7 +43,7 @@ class ExportUserIntoExcelTask(BaseTask):
         total_record = self.queryset.count()
         sheet = workbook.active
         for index, instance in enumerate(self.queryset):
-            print("Appending %s into excel" % instance.username)
+            print(f"Appending {instance.username} into excel")
             sheet.append(self.create_row(instance))
             progress_recorder.set_progress(index + 1, total=total_record, description="Inserting record into row")
         return workbook

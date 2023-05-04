@@ -50,6 +50,6 @@ def download_file_view(request):
         with open(filepath, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/ms-excel")
             outfile = os.path.basename(filepath)
-            response['Content-Disposition'] = "attachment; filename=%s" % outfile
+            response['Content-Disposition'] = f"attachment; filename={outfile}"
             return response
     raise Http404
